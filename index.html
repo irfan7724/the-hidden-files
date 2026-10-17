@@ -1,0 +1,1334 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1424">
+
+  <title>THE HIDDEN FILES</title>
+
+  <!-- =====================================
+       MAIN CSS
+  ====================================== -->
+  <link rel="stylesheet" href="01-style.css">
+  <link rel="stylesheet" href="05-story.css">
+  <link rel="stylesheet" href="06-investigation.css">
+  <link rel="stylesheet" href="07-case01.css">
+
+  <!-- =====================================
+       CASE 02–06 CSS
+  ====================================== -->
+  <link rel="stylesheet" href="10-case02.css">
+  <link rel="stylesheet" href="11-case03.css">
+  <link rel="stylesheet" href="12-case04.css">
+  <link rel="stylesheet" href="13-case05.css">
+  <link rel="stylesheet" href="15-case06.css">
+
+  <!-- =====================================
+       TEMPORARY PROFILE LAYOUT
+       Final styling in 01-style.css
+  ====================================== -->
+  <style>
+    .hq-panel {
+      position: relative;
+    }
+
+    .hq-avatar-button {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      padding: 0;
+      margin: 0;
+      border: 2px solid #d9b66f;
+      border-radius: 50%;
+      background: #283b57;
+      color: #f7f8fc;
+      font-size: 35px;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .hq-avatar-button:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 18px rgba(217,182,111,.4);
+    }
+
+    .hq-avatar-button:focus-visible {
+      outline: 3px solid #f2d69b;
+      outline-offset: 4px;
+    }
+
+    .hq-panel > .eyebrow {
+      padding-right: 75px;
+      min-height: 45px;
+    }
+
+    .legacy-profile-action {
+      display: none !important;
+    }
+
+    .settings-section {
+      margin: 24px 0 12px;
+      padding-top: 18px;
+      border-top: 1px solid #34445d;
+    }
+
+    .settings-section-title {
+      margin-bottom: 14px;
+      color: #f2d69b;
+      font-size: 17px;
+    }
+
+    .settings-helper {
+      color: #a9b5c8;
+      font-size: 13px;
+      line-height: 1.7;
+      margin: 10px 0;
+    }
+
+    .settings-placeholder {
+      padding: 16px;
+      margin-top: 12px;
+      border: 1px dashed #455470;
+      border-radius: 10px;
+      background: #182940;
+      color: #a9b5c8;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .settings-logout-btn {
+      width: 100%;
+      margin-top: 16px;
+      border-color: #d88e86;
+      color: #ffd2cc;
+    }
+
+    @media (max-width: 600px) {
+      .hq-avatar-button {
+        top: 15px;
+        right: 15px;
+        width: 55px;
+        height: 55px;
+        font-size: 30px;
+      }
+
+      .hq-panel > .eyebrow {
+        padding-right: 65px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hq-avatar-button {
+        transition: none;
+      }
+    }
+  </style>
+
+  <!-- =====================================
+       ACCOUNT & PROFILE
+  ====================================== -->
+  <script src="02-accounts.js" defer></script>
+  <script src="03-profile.js" defer></script>
+
+  <!-- =====================================
+       SEASON & STORY
+  ====================================== -->
+  <script src="04-seasons.js" defer></script>
+  <script src="05-story.js" defer></script>
+
+  <!-- =====================================
+       INVESTIGATION & CASE 01
+  ====================================== -->
+  <script src="06-investigation.js" defer></script>
+  <script src="07-case01.js" defer></script>
+
+  <!-- =====================================
+       SHARED PROGRESS
+  ====================================== -->
+  <script src="08-progress.js" defer></script>
+
+  <!-- =====================================
+       CASE 02–06
+  ====================================== -->
+  <script src="10-case02.js" defer></script>
+  <script src="11-case03.js" defer></script>
+  <script src="12-case04.js" defer></script>
+  <script src="13-case05.js" defer></script>
+  <script src="15-case06.js" defer></script>
+
+  <!-- =====================================
+       EVIDENCE BOARD & NAVIGATION
+  ====================================== -->
+  <script src="09-evidence.js" defer></script>
+  <script src="14-navigation.js" defer></script>
+
+  <!-- =====================================
+       FINAL CASE & ENDING
+  ====================================== -->
+  <script src="19-case10.js"></script>
+  <script src="20-victory.js"></script>
+  <script src="21-epilogue.js"></script>
+  <script src="22-case10-study.js"></script>
+  <!-- =====================================
+       AVATAR & SETTINGS CONNECTION
+       Temporary until 03-profile.js update
+  ====================================== -->
+  <script defer>
+    document.addEventListener("DOMContentLoaded", function () {
+
+      const avatar = document.getElementById("hq-avatar");
+      const logout = document.getElementById("settings-logout-btn");
+
+      if (avatar) {
+        avatar.addEventListener("click", function () {
+          if (typeof openProfileSettings === "function") {
+            openProfileSettings();
+          }
+        });
+      }
+
+      if (logout) {
+        logout.addEventListener("click", function () {
+          if (typeof logoutProfile === "function") {
+            logoutProfile();
+          }
+        });
+      }
+
+    });
+  </script>
+
+</head>
+
+<body>
+
+<main id="app">
+
+  <!-- =====================================
+       01 — WELCOME SCREEN
+  ====================================== -->
+  <section id="welcome-screen" class="screen">
+
+    <div class="background-overlay"></div>
+
+    <div class="welcome-content">
+
+      <div class="game-label">
+        INTERACTIVE DETECTIVE EXPERIENCE
+      </div>
+
+      <div class="game-symbol">◆</div>
+
+      <h1 class="game-title">
+        THE<br>
+        <span>HIDDEN FILES</span>
+      </h1>
+
+      <p class="game-tagline">
+        Every File Holds a Secret.
+      </p>
+
+      <div class="gold-line"></div>
+
+      <p class="game-description">
+        Enter a world of hidden evidence,
+        suspicious transactions and untold
+        corporate mysteries.
+      </p>
+
+      <div class="welcome-actions">
+
+        <button
+          id="start-btn"
+          class="primary-btn"
+          type="button">
+          ENTER INVESTIGATION
+        </button>
+
+      </div>
+
+      <p class="season-label">
+        SEASON 01 — THE FAR CONSPIRACY
+      </p>
+
+    </div>
+
+    <footer class="welcome-footer">
+      <span>THE HIDDEN FILES</span>
+      <span>© 2026</span>
+    </footer>
+
+  </section>
+
+
+  <!-- =====================================
+       02 — PROFILE SELECTION
+  ====================================== -->
+  <section
+    id="profile-screen"
+    class="screen app-page hidden">
+
+    <div class="page-panel">
+
+      <p class="eyebrow">
+        DETECTIVE ACCESS
+      </p>
+
+      <h2>
+        Who's investigating today?
+      </h2>
+
+      <p class="page-description">
+        Choose an existing detective or create
+        a new profile. No password required.
+      </p>
+
+      <div
+        id="profile-list"
+        class="profile-list">
+      </div>
+
+      <div class="panel-divider"></div>
+
+      <h3>Create New Detective</h3>
+
+      <form
+        id="create-profile-form"
+        class="profile-form">
+
+        <label for="detective-name">
+          Detective Name
+        </label>
+
+        <input
+          id="detective-name"
+          type="text"
+          maxlength="24"
+          autocomplete="off"
+          placeholder="Enter your name"
+          required>
+
+        <p
+          id="profile-error"
+          class="form-error"
+          role="alert"
+          hidden>
+        </p>
+
+        <button
+          type="submit"
+          class="primary-btn">
+          CREATE PROFILE
+        </button>
+
+      </form>
+
+      <button
+        id="profile-back-btn"
+        class="secondary-btn"
+        type="button">
+        Back to Welcome
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       03 — PROFILE CREATED
+  ====================================== -->
+  <section
+    id="created-screen"
+    class="screen app-page hidden">
+
+    <div class="page-panel center-panel">
+
+      <div class="large-symbol">✦</div>
+
+      <p class="eyebrow">
+        PROFILE CREATED
+      </p>
+
+      <h2>
+        Welcome, Detective!
+      </h2>
+
+      <p
+        id="created-message"
+        class="page-description">
+      </p>
+
+      <button
+        id="enter-hq-btn"
+        class="primary-btn"
+        type="button">
+        ENTER HEADQUARTERS
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       04 — DETECTIVE HEADQUARTERS
+  ====================================== -->
+  <section
+    id="hq-screen"
+    class="screen app-page hidden">
+
+    <div class="page-panel hq-panel">
+
+      <p class="eyebrow">
+        DETECTIVE HEADQUARTERS
+      </p>
+
+      <!-- CLICKABLE DETECTIVE AVATAR -->
+      <button
+        id="hq-avatar"
+        class="hq-avatar-button"
+        type="button"
+        aria-label="Open Detective Profile and Settings"
+        title="Profile & Settings">
+        🕵️
+      </button>
+
+      <h2 id="hq-greeting">
+        Welcome, Detective
+      </h2>
+
+      <p class="page-description">
+        Your investigation headquarters is ready.
+      </p>
+
+      <div class="hq-season-card">
+
+        <span class="eyebrow">
+          SEASON 01
+        </span>
+
+        <h3>The FAR Conspiracy</h3>
+
+        <p>
+          The Meridian Files — 10 investigations
+          are waiting to be uncovered.
+        </p>
+
+        <span
+          class="coming-label"
+          hidden>
+          Investigation system coming next
+        </span>
+
+      </div>
+
+      <div class="hq-actions">
+
+        <button
+          id="open-seasons-btn"
+          class="primary-btn"
+          type="button">
+          SELECT SEASON
+        </button>
+
+        <!-- KEEP IDS FOR OLD JS COMPATIBILITY -->
+        <button
+          id="edit-profile-btn"
+          class="secondary-btn legacy-profile-action"
+          type="button"
+          tabindex="-1"
+          aria-hidden="true">
+          PROFILE
+        </button>
+
+        <button
+          id="switch-profile-btn"
+          class="secondary-btn legacy-profile-action"
+          type="button"
+          tabindex="-1"
+          aria-hidden="true">
+          LOGOUT / SWITCH DETECTIVE
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       05 — DETECTIVE PROFILE & SETTINGS
+  ====================================== -->
+  <section
+    id="edit-profile-screen"
+    class="screen app-page hidden">
+
+    <div class="page-panel">
+
+      <p
+        class="eyebrow"
+        id="settings-eyebrow">
+        DETECTIVE SETTINGS
+      </p>
+
+      <h2 id="settings-title">
+        Edit Your Profile
+      </h2>
+
+      <p
+        class="page-description"
+        id="settings-description">
+        Personalise your detective identity.
+        Your investigation progress will be preserved.
+      </p>
+
+      <!-- =====================================
+           DETECTIVE IDENTITY
+      ====================================== -->
+      <form
+        id="edit-profile-form"
+        class="profile-form">
+
+        <div class="settings-section">
+          <h3 class="settings-section-title">
+            🕵️ DETECTIVE IDENTITY
+          </h3>
+        </div>
+
+        <label
+          for="edit-detective-name"
+          id="settings-name-label">
+          Detective Name
+        </label>
+
+        <input
+          id="edit-detective-name"
+          type="text"
+          maxlength="24"
+          required>
+
+        <h3 id="settings-avatar-label">
+          Choose Your Avatar
+        </h3>
+
+        <div
+          id="avatar-options"
+          class="avatar-grid"
+          role="group"
+          aria-label="Choose avatar">
+        </div>
+
+        <!-- =====================================
+             LANGUAGE
+        ====================================== -->
+        <div class="settings-section">
+          <h3 class="settings-section-title">
+            🌐 LANGUAGE
+          </h3>
+        </div>
+
+        <label
+          for="profile-language"
+          id="settings-language-label">
+          Language
+        </label>
+
+        <select
+          id="profile-language"
+          class="settings-select">
+          <option value="en">English</option>
+          <option value="ms">Bahasa Melayu</option>
+        </select>
+
+        <!-- =====================================
+             AUDIO PREFERENCES
+        ====================================== -->
+        <div class="settings-section">
+          <h3 class="settings-section-title">
+            🔊 SOUND & MUSIC
+          </h3>
+        </div>
+
+        <label class="setting-toggle">
+
+          <span id="settings-sound-label">
+            Sound Effects
+          </span>
+
+          <input
+            id="profile-sound"
+            type="checkbox">
+
+        </label>
+
+        <p class="settings-helper">
+          Sound preference is saved with your
+          detective profile.
+        </p>
+
+
+<!-- =====================================
+     BACKGROUND MUSIC & VOLUME
+====================================== -->
+
+<div class="settings-placeholder"
+     id="settings-music-placeholder">
+
+  <h3 id="settings-music-title">
+    🎵 Background Music & Volume
+  </h3>
+
+  <label class="setting-toggle">
+    <span id="settings-music-label">
+      Background Music
+    </span>
+
+    <input
+      id="profile-music"
+      type="checkbox"
+      checked>
+  </label>
+
+  <div class="music-volume-control">
+
+    <label for="profile-music-volume"
+           id="settings-volume-label">
+      Music Volume
+    </label>
+
+    <div class="music-volume-row">
+
+      <input
+        id="profile-music-volume"
+        type="range"
+        min="0"
+        max="100"
+        step="1"
+        value="30">
+
+      <strong id="profile-music-volume-value">
+        30%
+      </strong>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+        <!-- =====================================
+             ACCESSIBILITY
+        ====================================== -->
+        <div class="settings-section">
+          <h3 class="settings-section-title">
+            ⚙️ ACCESSIBILITY
+          </h3>
+        </div>
+
+        <label class="setting-toggle">
+
+          <span id="settings-motion-label">
+            Reduced Motion
+          </span>
+
+          <input
+            id="profile-motion"
+            type="checkbox">
+
+        </label>
+
+        <!-- OLD JS EXPECTS THIS ELEMENT -->
+        <h3
+          id="settings-preferences-label"
+          hidden>
+          Preferences
+        </h3>
+
+        <p
+          id="edit-profile-error"
+          class="form-error"
+          role="alert"
+          hidden>
+        </p>
+
+        <button
+          id="save-profile-btn"
+          class="primary-btn"
+          type="submit">
+          SAVE CHANGES
+        </button>
+
+      </form>
+
+      <!-- =====================================
+           DETECTIVE STATISTICS
+      ====================================== -->
+      <div class="settings-section">
+
+        <h3 class="settings-section-title">
+          📊 DETECTIVE STATISTICS
+        </h3>
+
+        <div
+          id="detective-statistics"
+          class="settings-placeholder">
+
+          Your XP, Rank, Lives and Case Progress
+          will appear here after the statistics
+          system is connected.
+
+        </div>
+
+      </div>
+
+      <!-- =====================================
+           LOGOUT / SWITCH DETECTIVE
+      ====================================== -->
+      <div class="settings-section">
+
+        <h3 class="settings-section-title">
+          🔐 ACCOUNT
+        </h3>
+
+        <p class="settings-helper">
+          Switch to another detective without
+          deleting your saved investigation progress.
+        </p>
+
+        <button
+          id="settings-logout-btn"
+          class="secondary-btn settings-logout-btn"
+          type="button">
+          LOGOUT / SWITCH DETECTIVE
+        </button>
+
+<!-- DELETE DETECTIVE PROFILE -->
+
+<button
+  id="delete-profile-btn"
+  class="secondary-btn"
+  type="button"
+  style="
+    width: 100%;
+    margin-top: 12px;
+    border-color: #d88e86;
+    color: #ffd2cc;
+  ">
+  DELETE DETECTIVE PROFILE
+</button>
+
+      </div>
+
+      <button
+        id="cancel-profile-btn"
+        class="secondary-btn settings-back-btn"
+        type="button">
+        BACK TO HEADQUARTERS
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       06 — SEASON SELECTION
+  ====================================== -->
+  <section
+    id="seasons-screen"
+    class="screen app-page hidden">
+
+    <div class="page-panel wide-panel">
+
+      <p
+        class="eyebrow"
+        data-season-i18n="archive">
+        CLASSIFIED ARCHIVE
+      </p>
+
+      <h2 data-season-i18n="selectTitle">
+        Select Your Season
+      </h2>
+
+      <p
+        class="page-description"
+        data-season-i18n="selectDescription">
+        Each season holds a different mystery.
+        Your detective identity remains the same.
+      </p>
+
+      <div class="season-grid">
+
+        <button
+          id="season-1-btn"
+          class="season-card available"
+          type="button">
+
+          <span class="season-number">
+            SEASON 01
+          </span>
+
+          <span class="season-card-title">
+            THE FAR CONSPIRACY
+          </span>
+
+          <span class="season-card-subtitle">
+            The Meridian Files
+          </span>
+
+          <span
+            class="season-card-description"
+            data-season-i18n="farDescription">
+            Investigate suspicious financial statements
+            and uncover the truth.
+          </span>
+
+          <span
+            class="season-status ready"
+            data-season-i18n="available">
+            AVAILABLE →
+          </span>
+
+        </button>
+
+        <div class="season-card locked">
+
+          <span class="season-number">
+            SEASON 02
+          </span>
+
+          <span class="season-card-title">
+            TAX INVESTIGATION
+          </span>
+
+          <span class="season-card-subtitle">
+            A New Mystery
+          </span>
+
+          <span
+            class="season-status"
+            data-season-i18n="comingSoon">
+            COMING SOON
+          </span>
+
+        </div>
+
+        <div class="season-card locked">
+
+          <span class="season-number">
+            SEASON 03
+          </span>
+
+          <span class="season-card-title">
+            MANAGEMENT ACCOUNTING
+          </span>
+
+          <span class="season-card-subtitle">
+            A New Mystery
+          </span>
+
+          <span
+            class="season-status"
+            data-season-i18n="comingSoon">
+            COMING SOON
+          </span>
+
+        </div>
+
+      </div>
+
+      <button
+        id="seasons-back-btn"
+        class="secondary-btn full-width"
+        type="button"
+        data-season-i18n="backHQ">
+        BACK TO HEADQUARTERS
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       07 — SEASON 01 OVERVIEW
+  ====================================== -->
+  <section
+    id="far-overview-screen"
+    class="screen app-page hidden">
+
+    <div class="page-panel wide-panel">
+
+      <p class="eyebrow">
+        SEASON 01
+      </p>
+
+      <h2>
+        THE FAR CONSPIRACY
+      </h2>
+
+      <p class="season-subheading">
+        The Meridian Files
+      </p>
+
+      <p
+        class="page-description"
+        data-season-i18n="farIntro">
+        Meridian Holdings Berhad is preparing its
+        financial statements for the year ended
+        31 December 2025.
+        But something does not add up.
+      </p>
+
+      <div class="season-progress-panel">
+
+        <span data-season-i18n="cases">
+          INVESTIGATION CASES
+        </span>
+
+        <strong>10</strong>
+
+      </div>
+
+      <!-- NAVIGATION MENU CREATED BY JS -->
+      <div
+        id="thf-season-menu"
+        class="thf-nav-menu">
+      </div>
+
+      <!-- STORY SYSTEM MOUNT POINT -->
+      <div id="story-entry-area"></div>
+
+      <!-- ORIGINAL INVESTIGATION MOUNT POINT -->
+      <div id="investigation-entry-area"></div>
+
+      <!-- ORIGINAL CASE PREVIEW MOUNT POINT -->
+      <div
+        id="case-preview-list"
+        class="case-preview-list">
+      </div>
+
+      <p
+        class="overview-notice"
+        data-season-i18n="previewNotice">
+        More investigations will be activated
+        in future development steps.
+      </p>
+
+      <button
+        id="far-back-btn"
+        class="secondary-btn full-width"
+        type="button"
+        data-season-i18n="backSeasons">
+        BACK TO SEASONS
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       08 — STORY MODE
+  ====================================== -->
+  <section
+    id="story-screen"
+    class="screen story-screen hidden">
+
+    <div class="story-background"></div>
+
+    <div class="story-topbar">
+
+      <div class="story-heading">
+
+        <span>THE HIDDEN FILES</span>
+
+        <strong id="story-chapter">
+          PROLOGUE
+        </strong>
+
+      </div>
+
+      <button
+        id="story-exit-btn"
+        class="story-small-btn"
+        type="button">
+        EXIT
+      </button>
+
+    </div>
+
+    <div class="story-character-area">
+
+      <img
+        id="story-character-image"
+        src="char-alya.png"
+        alt="Alya Rahman"
+        onerror="this.style.display='none'">
+
+    </div>
+
+    <div class="story-dialogue-wrap">
+
+      <div class="story-dialogue">
+
+        <div class="story-dialogue-header">
+
+          <span id="story-speaker">
+            UNKNOWN
+          </span>
+
+          <span id="story-counter">
+            01 / 12
+          </span>
+
+        </div>
+
+        <p
+          id="story-text"
+          aria-live="polite">
+        </p>
+
+        <div class="story-controls">
+
+          <button
+            id="story-back-btn"
+            class="story-small-btn"
+            type="button">
+            BACK
+          </button>
+
+          <button
+            id="story-history-btn"
+            class="story-small-btn"
+            type="button">
+            HISTORY
+          </button>
+
+          <button
+            id="story-skip-btn"
+            class="story-small-btn"
+            type="button">
+            SKIP
+          </button>
+
+          <button
+            id="story-next-btn"
+            class="story-next-btn"
+            type="button">
+            NEXT →
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- STORY HISTORY MODAL -->
+    <div
+      id="story-history-panel"
+      class="story-modal hidden"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="history-title">
+
+      <div class="story-modal-content">
+
+        <h2 id="history-title">
+          Dialogue History
+        </h2>
+
+        <div
+          id="story-history-list"
+          class="story-history-list">
+        </div>
+
+        <button
+          id="story-close-history-btn"
+          class="primary-btn"
+          type="button">
+          CLOSE
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       09 — STORY COMPLETE
+  ====================================== -->
+  <section
+    id="story-complete-screen"
+    class="screen app-page hidden">
+
+    <div class="page-panel center-panel">
+
+      <div class="large-symbol">◆</div>
+
+      <p class="eyebrow">
+        CLASSIFIED BRIEFING COMPLETE
+      </p>
+
+      <h2 id="story-complete-title">
+        The Investigation Begins
+      </h2>
+
+      <p
+        id="story-complete-description"
+        class="page-description">
+        The first case file is waiting to be opened.
+      </p>
+
+      <button
+        id="story-complete-back-btn"
+        class="primary-btn"
+        type="button">
+        RETURN TO SEASON OVERVIEW
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       10 — INVESTIGATION DESK
+       CASE 01
+  ====================================== -->
+  <section
+    id="investigation-screen"
+    class="screen app-page investigation-page hidden">
+
+    <div class="page-panel investigation-panel">
+
+      <div class="investigation-header">
+
+        <div>
+
+          <p
+            class="eyebrow"
+            id="inv-case-label">
+            CASE 01 / 10
+          </p>
+
+          <h2 id="inv-title">
+            The Invoice Trap
+          </h2>
+
+          <p
+            class="inv-subtitle"
+            id="inv-subtitle">
+            Meridian Holdings Berhad · 2025
+          </p>
+
+        </div>
+
+        <button
+          id="inv-exit-btn"
+          class="secondary-btn"
+          type="button">
+          EXIT
+        </button>
+
+      </div>
+
+      <div class="inv-statusbar">
+
+        <span id="inv-clue-counter">
+          CLUES 0 / 4
+        </span>
+
+        <span id="inv-deduction-status">
+          DEDUCTION: LOCKED
+        </span>
+
+      </div>
+
+      <div
+        class="inv-intro"
+        id="inv-intro">
+      </div>
+
+      <h3 id="inv-evidence-heading">
+        Evidence Files
+      </h3>
+
+      <p
+        class="inv-help"
+        id="inv-evidence-help">
+      </p>
+
+      <div
+        id="inv-document-list"
+        class="inv-document-list">
+      </div>
+
+      <h3 id="inv-witness-heading">
+        Witness Interview
+      </h3>
+
+      <div id="inv-witness-area"></div>
+
+      <h3 id="inv-board-heading">
+        Evidence Board
+      </h3>
+
+      <div
+        id="inv-evidence-board"
+        class="inv-evidence-board">
+      </div>
+
+      <div
+        id="inv-deduction-area"
+        class="inv-deduction-area">
+      </div>
+
+      <p
+        id="inv-save-notice"
+        class="inv-save-notice"
+        role="status"
+        aria-live="polite">
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       11 — INVESTIGATION DOCUMENT MODAL
+  ====================================== -->
+  <div
+    id="inv-document-modal"
+    class="inv-modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="inv-document-title">
+
+    <div class="inv-modal-content">
+
+      <div class="inv-modal-header">
+
+        <h2 id="inv-document-title">
+          Evidence Document
+        </h2>
+
+        <button
+          id="inv-document-close"
+          class="secondary-btn"
+          type="button">
+          CLOSE
+        </button>
+
+      </div>
+
+      <div id="inv-document-body"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================
+       12 — CASE 01 PUZZLE
+  ====================================== -->
+  <section
+    id="case01-screen"
+    class="screen app-page case01-page hidden">
+
+    <div class="page-panel case01-panel">
+
+      <div class="case01-header">
+
+        <div>
+
+          <p
+            class="eyebrow"
+            id="case01-label">
+            CASE 01 — PUZZLE
+          </p>
+
+          <h2>
+            The Invoice Trap
+          </h2>
+
+          <p
+            class="case01-muted"
+            id="case01-subtitle">
+          </p>
+
+        </div>
+
+        <button
+          id="case01-exit-btn"
+          class="secondary-btn"
+          type="button">
+          EXIT
+        </button>
+
+      </div>
+
+      <div class="case01-steps">
+
+        <span id="case01-step1">
+          01 FIND THE ERROR
+        </span>
+
+        <span id="case01-step2">
+          02 CORRECT THE ENTRY
+        </span>
+
+        <span id="case01-step3">
+          03 CASE REPORT
+        </span>
+
+      </div>
+
+      <div id="case01-content"></div>
+
+      <p
+        id="case01-save-message"
+        class="case01-muted"
+        role="status"
+        aria-live="polite">
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================
+       13 — DYNAMIC CASE SCREENS
+
+       Case Files:
+       Created by 14-navigation.js
+
+       Case 02–05:
+       Created by their own JS files
+
+       Case 06:
+       Created by 15-case06.js
+
+       Do not add an empty case06-screen here.
+  ====================================== -->
+
+</main>
+<script src="23-audio.js"></script>
+</body>
+</html>

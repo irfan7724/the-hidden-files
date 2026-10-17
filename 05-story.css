@@ -1,0 +1,271 @@
+
+/* ========================================
+   THE HIDDEN FILES
+   05 - STORY MODE STYLES
+======================================== */
+
+#story-entry-area {
+  margin: 22px 0;
+}
+
+.story-entry-btn {
+  width: 100%;
+  min-height: 60px;
+  font-size: 15px;
+}
+
+.story-screen {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  isolation: isolate;
+  overflow: hidden;
+  background: #101c30;
+}
+
+.story-background {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(5, 11, 22, 0.15),
+      rgba(5, 11, 22, 0.05) 45%,
+      rgba(5, 11, 22, 0.55)
+    ),
+    url("bg-story-office.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.story-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px clamp(16px, 4vw, 48px);
+  background: rgba(5, 11, 22, 0.55);
+}
+
+.story-heading {
+  display: grid;
+  gap: 5px;
+}
+
+.story-heading span {
+  color: #d9b66f;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.story-heading strong {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.story-character-area {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex: 1;
+  min-height: 120px;
+  pointer-events: none;
+}
+
+.story-character-area img {
+  display: block;
+  width: auto;
+  max-width: min(65vw, 500px);
+  max-height: min(56vh, 580px);
+  object-fit: contain;
+  object-position: bottom;
+  filter: drop-shadow(0 12px 25px rgba(0,0,0,0.45));
+}
+
+.story-dialogue-wrap {
+  position: relative;
+  width: 100%;
+  padding: 0 16px 24px;
+}
+
+.story-dialogue {
+  width: 100%;
+  max-width: 950px;
+  margin: auto;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid rgba(217,182,111,0.65);
+  border-radius: 14px;
+  background: rgba(8, 16, 30, 0.94);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+
+.story-dialogue-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: #d9b66f;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+#story-text {
+  min-height: 90px;
+  padding: 20px 0;
+  color: #f7f8fc;
+  font-size: clamp(16px, 2.3vw, 20px);
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.story-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.story-small-btn,
+.story-next-btn {
+  min-height: 44px;
+  padding: 11px 16px;
+  border-radius: 7px;
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+.story-small-btn {
+  border: 1px solid #78869c;
+  background: rgba(20, 36, 58, 0.92);
+  color: #f7f8fc;
+}
+
+.story-small-btn:hover {
+  border-color: #d9b66f;
+}
+
+.story-small-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.story-next-btn {
+  margin-left: auto;
+  border: 1px solid #d9b66f;
+  background: #d9b66f;
+  color: #111827;
+}
+
+.story-next-btn:hover {
+  background: #f2d69b;
+}
+
+.story-modal {
+  position: fixed;
+  z-index: 30;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(2, 7, 15, 0.88);
+}
+
+.story-modal-content {
+  width: 100%;
+  max-width: 680px;
+  max-height: 85vh;
+  max-height: 85dvh;
+  overflow-y: auto;
+  padding: 24px;
+  border: 1px solid #d9b66f;
+  border-radius: 14px;
+  background: #111f34;
+}
+
+.story-modal-content h2 {
+  margin-bottom: 20px;
+  color: #f2d69b;
+}
+
+.story-history-list {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.story-history-item {
+  padding: 14px;
+  border-left: 3px solid #d9b66f;
+  background: #1b2b43;
+}
+
+.story-history-item strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #f2d69b;
+}
+
+.story-history-item p {
+  color: #e0e5ef;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+@media (max-width: 600px) {
+  .story-topbar {
+    padding: 14px;
+  }
+
+  .story-heading span {
+    font-size: 9px;
+  }
+
+  .story-character-area img {
+    max-width: 80vw;
+    max-height: 38vh;
+  }
+
+  .story-dialogue-wrap {
+    padding: 0 10px 12px;
+  }
+
+  .story-dialogue {
+    padding: 16px;
+  }
+
+  #story-text {
+    min-height: 120px;
+    font-size: 16px;
+  }
+
+  .story-controls {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .story-small-btn,
+  .story-next-btn {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 4px;
+    font-size: 10px;
+  }
+}
+
+@media (max-height: 650px) {
+  .story-character-area img {
+    max-height: 25vh;
+  }
+
+  #story-text {
+    min-height: 0;
+    padding: 12px 0;
+  }
+}

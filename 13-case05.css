@@ -1,0 +1,610 @@
+
+/* ==========================================
+   THE HIDDEN FILES
+   CASE 05 — THE COMMISSION CONNECTION
+
+   TIMELINE MARKER
+   ANSWER FEEDBACK:
+   ORANGE = SELECTED
+   GREEN  = CORRECT
+   RED    = WRONG
+========================================== */
+
+/* ==========================================
+   01. MAIN SCREEN
+========================================== */
+
+.thf-c05-screen {
+  align-items: flex-start;
+}
+
+.thf-c05-panel {
+  width: 100%;
+  max-width: 980px;
+}
+
+/* ==========================================
+   02. HEADER
+========================================== */
+
+.thf-c05-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.thf-c05-header h2,
+.thf-c05-box h3,
+.thf-c05-hint h4 {
+  color: #f2d69b;
+}
+
+.thf-c05-header p,
+.thf-c05-box p {
+  color: #c9d5e5;
+  line-height: 1.8;
+}
+
+/* ==========================================
+   03. STATUS AND ACTION BUTTONS
+========================================== */
+
+.thf-c05-status,
+.thf-c05-tools,
+.thf-c05-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.thf-c05-status span {
+  padding: 9px 12px;
+  border: 1px solid #52627b;
+  border-radius: 7px;
+  background: #1d2d45;
+  color: #f2d69b;
+  font-size: 12px;
+}
+
+.thf-c05-tools button,
+.thf-c05-actions button {
+  flex: 1;
+  min-width: 155px;
+}
+
+.thf-c05-tools button {
+  padding: 13px;
+  border: 1px solid #d9b66f;
+  border-radius: 8px;
+  background: #283a52;
+  color: #f2d69b;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ==========================================
+   04. CONTENT BOX
+========================================== */
+
+.thf-c05-box {
+  margin: 18px 0;
+  padding: clamp(17px, 4vw, 28px);
+  border: 1px solid #465978;
+  border-radius: 12px;
+  background: #192a42;
+}
+
+/* ==========================================
+   05. EVIDENCE DOCUMENTS
+========================================== */
+
+.thf-c05-paper {
+  margin: 16px 0;
+  padding: 20px;
+  border: 1px solid #c8c2b4;
+  border-radius: 9px;
+  background: #f3efe5;
+  color: #1b2940;
+}
+
+.thf-c05-paper h4,
+.thf-c05-paper p {
+  color: #1b2940;
+}
+
+.thf-c05-paper h4 {
+  margin: 0 0 14px;
+}
+
+.thf-c05-paper-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid #d4ccbd;
+  font-size: 14px;
+}
+
+.thf-c05-paper-row span:last-child {
+  font-weight: bold;
+  text-align: right;
+}
+
+/* ==========================================
+   06. TIMELINE LAYOUT
+========================================== */
+
+.thf-c05-timeline {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  margin: 25px 0;
+  padding-left: 24px;
+}
+
+.thf-c05-timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  bottom: 12px;
+  width: 3px;
+  background: #8c7650;
+}
+
+/* ==========================================
+   07. TIMELINE EVENT — DEFAULT
+========================================== */
+
+.thf-c05-event {
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  text-align: left;
+  border: 1px solid #60738e;
+  border-radius: 10px;
+  background: #253952;
+  color: #f3f5f8;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.thf-c05-event::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 22px;
+  width: 13px;
+  height: 13px;
+  border: 2px solid #d9b66f;
+  border-radius: 50%;
+  background: #253952;
+}
+
+.thf-c05-event strong {
+  display: block;
+  color: #f2d69b;
+  margin-bottom: 7px;
+}
+
+.thf-c05-event span {
+  display: block;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* ==========================================
+   08. ORANGE — SELECTED / NOT VERIFIED
+========================================== */
+
+.thf-c05-event.selected:not(.correct):not(.wrong) {
+  border: 2px solid #f2b544;
+  background: #514022;
+  color: #fff1d0;
+  box-shadow: 0 0 0 2px rgba(242, 181, 68, 0.18);
+}
+
+.thf-c05-event.selected:not(.correct):not(.wrong)::before {
+  background: #f2b544;
+  border-color: #f2b544;
+}
+
+.thf-c05-event.selected:not(.correct):not(.wrong) strong {
+  color: #ffd77e;
+}
+
+/* ==========================================
+   09. GREEN — CORRECT ANSWER
+========================================== */
+
+.thf-c05-event.correct,
+.thf-c05-event.selected.correct,
+.thf-c05-event.is-correct,
+.thf-c05-event[data-result="correct"] {
+  border: 2px solid #43be79 !important;
+  background: #173e2d !important;
+  color: #e1ffed !important;
+  box-shadow: 0 0 0 2px rgba(67, 190, 121, 0.18);
+}
+
+.thf-c05-event.correct::before,
+.thf-c05-event.is-correct::before,
+.thf-c05-event[data-result="correct"]::before {
+  background: #43be79 !important;
+  border-color: #43be79 !important;
+}
+
+.thf-c05-event.correct strong,
+.thf-c05-event.is-correct strong,
+.thf-c05-event[data-result="correct"] strong {
+  color: #91f0b7 !important;
+}
+
+/* ==========================================
+   10. RED — WRONG ANSWER
+========================================== */
+
+.thf-c05-event.wrong,
+.thf-c05-event.selected.wrong,
+.thf-c05-event.is-wrong,
+.thf-c05-event[data-result="wrong"] {
+  border: 2px solid #e25353 !important;
+  background: #4b2028 !important;
+  color: #ffe5e5 !important;
+  box-shadow: 0 0 0 2px rgba(226, 83, 83, 0.18);
+}
+
+.thf-c05-event.wrong::before,
+.thf-c05-event.is-wrong::before,
+.thf-c05-event[data-result="wrong"]::before {
+  background: #e25353 !important;
+  border-color: #e25353 !important;
+}
+
+.thf-c05-event.wrong strong,
+.thf-c05-event.is-wrong strong,
+.thf-c05-event[data-result="wrong"] strong {
+  color: #ffaaaa !important;
+}
+
+/* ==========================================
+   11. ANSWER CHOICE GRID
+========================================== */
+
+.thf-c05-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.thf-c05-choice {
+  padding: 16px;
+  border: 1px solid #60738e;
+  border-radius: 9px;
+  background: #253952;
+  color: #eef3fa;
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.6;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* ==========================================
+   12. ORANGE — CHOICE SELECTED
+========================================== */
+
+.thf-c05-choice.selected:not(.correct):not(.wrong) {
+  border: 2px solid #f2b544;
+  background: #514022;
+  color: #fff1d0;
+  box-shadow: 0 0 0 2px rgba(242, 181, 68, 0.18);
+}
+
+/* ==========================================
+   13. GREEN — CORRECT CHOICE
+========================================== */
+
+.thf-c05-choice.correct,
+.thf-c05-choice.selected.correct,
+.thf-c05-choice.is-correct,
+.thf-c05-choice[data-result="correct"] {
+  border: 2px solid #43be79 !important;
+  background: #173e2d !important;
+  color: #e1ffed !important;
+  box-shadow: 0 0 0 2px rgba(67, 190, 121, 0.18);
+}
+
+/* ==========================================
+   14. RED — WRONG CHOICE
+========================================== */
+
+.thf-c05-choice.wrong,
+.thf-c05-choice.selected.wrong,
+.thf-c05-choice.is-wrong,
+.thf-c05-choice[data-result="wrong"] {
+  border: 2px solid #e25353 !important;
+  background: #4b2028 !important;
+  color: #ffe5e5 !important;
+  box-shadow: 0 0 0 2px rgba(226, 83, 83, 0.18);
+}
+
+/* ==========================================
+   15. LOCKED CORRECT ANSWERS
+========================================== */
+
+.thf-c05-event.correct:disabled,
+.thf-c05-event.is-correct:disabled,
+.thf-c05-choice.correct:disabled,
+.thf-c05-choice.is-correct:disabled {
+  opacity: 1 !important;
+  cursor: not-allowed;
+}
+
+.thf-c05-event:disabled,
+.thf-c05-choice:disabled {
+  opacity: 0.85;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   16. KEYBOARD FOCUS
+========================================== */
+
+.thf-c05-event:focus-visible,
+.thf-c05-choice:focus-visible {
+  outline: 3px solid #f2d69b;
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   17. QUESTION HEADINGS
+========================================== */
+
+.thf-c05-question {
+  margin: 20px 0 8px;
+  color: #f2d69b;
+  font-weight: bold;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   18. QUESTION STATUS LABELS
+========================================== */
+
+.thf-c05-question-status,
+.thf-c05-answer-status {
+  display: inline-block;
+  margin: 8px 0;
+  padding: 6px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.thf-c05-question-status.correct,
+.thf-c05-answer-status.correct {
+  background: #173e2d;
+  color: #91f0b7;
+  border: 1px solid #43be79;
+}
+
+.thf-c05-question-status.wrong,
+.thf-c05-answer-status.wrong {
+  background: #4b2028;
+  color: #ffaaaa;
+  border: 1px solid #e25353;
+}
+
+.thf-c05-question-status.pending,
+.thf-c05-answer-status.pending {
+  background: #514022;
+  color: #ffd77e;
+  border: 1px solid #f2b544;
+}
+
+/* ==========================================
+   19. FEEDBACK MESSAGE
+========================================== */
+
+.thf-c05-feedback {
+  margin: 16px 0;
+  padding: 15px;
+  border-left: 4px solid #d9b66f;
+  border-radius: 7px;
+  background: #2b3b54;
+  color: #ffe5a9;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.thf-c05-feedback.success {
+  border-left-color: #78c7a0;
+  background: #1c3c33;
+  color: #d7f7e5;
+}
+
+.thf-c05-feedback.error {
+  border-left-color: #e25353;
+  background: #4b2028;
+  color: #ffe5e5;
+}
+
+/* ==========================================
+   20. CASE REPORT FINDINGS
+========================================== */
+
+.thf-c05-finding {
+  padding: 16px;
+  margin: 12px 0;
+  border: 1px solid #536783;
+  border-radius: 8px;
+  background: #243750;
+}
+
+.thf-c05-finding strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #f2d69b;
+}
+
+/* ==========================================
+   21. FINAL XP RESULT
+========================================== */
+
+.thf-c05-result {
+  margin: 22px 0;
+  padding: 24px;
+  border: 1px solid #d9b66f;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.thf-c05-result strong {
+  display: block;
+  margin: 12px 0;
+  color: #f2d69b;
+  font-size: 36px;
+}
+
+.thf-c05-small {
+  color: #aab8cc;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* ==========================================
+   22. MODAL BACKDROP
+========================================== */
+
+.thf-c05-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(3, 9, 20, 0.9);
+}
+
+.thf-c05-modal[hidden] {
+  display: none !important;
+}
+
+/* ==========================================
+   23. MODAL CARD
+========================================== */
+
+.thf-c05-modal-card {
+  width: min(100%, 760px);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: clamp(18px, 4vw, 28px);
+  border: 1px solid #d9b66f;
+  border-radius: 13px;
+  background: #15253d;
+}
+
+.thf-c05-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.thf-c05-modal-header h3 {
+  color: #f2d69b;
+}
+
+.thf-c05-close {
+  padding: 10px 14px;
+  border: 1px solid #71809a;
+  border-radius: 7px;
+  background: #283c55;
+  color: white;
+  cursor: pointer;
+}
+
+/* ==========================================
+   24. HINT SYSTEM
+========================================== */
+
+.thf-c05-hint {
+  padding: 17px;
+  margin: 13px 0;
+  border: 1px solid #596b85;
+  border-radius: 9px;
+  background: #243750;
+}
+
+.thf-c05-hint p {
+  color: #e0e8f3;
+  line-height: 1.8;
+}
+
+.thf-c05-hint button {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.thf-c05-formula {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 7px;
+  background: #f3efe5;
+  color: #142139;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+/* ==========================================
+   25. RESPONSIVE MOBILE
+========================================== */
+
+@media (max-width: 650px) {
+  .thf-c05-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .thf-c05-header > button,
+  .thf-c05-actions button {
+    width: 100%;
+  }
+
+  .thf-c05-actions {
+    flex-direction: column;
+  }
+
+  .thf-c05-paper-row {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .thf-c05-paper-row span:last-child {
+    text-align: left;
+  }
+}
+
+/* ==========================================
+   26. ACCESSIBILITY
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .thf-c05-screen *,
+  .thf-c05-modal * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

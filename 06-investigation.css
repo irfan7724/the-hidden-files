@@ -1,0 +1,393 @@
+
+/* ========================================
+   THE HIDDEN FILES
+   06 - INVESTIGATION DESK
+======================================== */
+
+.investigation-page {
+  align-items: flex-start;
+}
+
+.investigation-panel {
+  max-width: 1080px;
+}
+
+.investigation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.investigation-header h2 {
+  color: var(--gold-light);
+}
+
+.inv-subtitle {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.inv-statusbar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+  padding: 15px;
+  border: 1px solid #455470;
+  border-radius: 9px;
+  background: #172940;
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.inv-intro {
+  padding: 20px;
+  margin-bottom: 28px;
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  background: #1b2b43;
+  color: #e0e5ef;
+  line-height: 1.8;
+}
+
+.investigation-panel h3 {
+  margin: 25px 0 12px;
+}
+
+.inv-help {
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.inv-document-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.inv-document-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  min-height: 170px;
+  padding: 20px;
+  border: 1px solid #52617a;
+  border-radius: 12px;
+  background: #1c3049;
+  color: var(--white);
+  text-align: left;
+}
+
+.inv-document-card:hover,
+.inv-document-card:focus-visible {
+  border-color: var(--gold);
+  background: #293e59;
+}
+
+.inv-document-icon {
+  font-size: 30px;
+}
+
+.inv-document-name {
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.inv-document-status {
+  margin-top: auto;
+  color: var(--gold-light);
+  font-size: 12px;
+}
+
+.inv-witness-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #455470;
+  border-radius: 12px;
+  background: #1b2b43;
+}
+
+.inv-witness-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 54px;
+  height: 54px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  background: #34445d;
+  font-size: 28px;
+}
+
+.inv-witness-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.inv-witness-info strong {
+  display: block;
+  color: var(--gold-light);
+}
+
+.inv-witness-info p {
+  margin: 10px 0 14px;
+  color: #e0e5ef;
+  line-height: 1.7;
+}
+
+.inv-evidence-board {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.inv-clue {
+  padding: 16px;
+  border: 1px solid #41516b;
+  border-radius: 9px;
+  background: #15243a;
+}
+
+.inv-clue.found {
+  border-color: rgba(217, 182, 111, 0.7);
+  background: #25354c;
+}
+
+.inv-clue strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--gold-light);
+  font-size: 13px;
+}
+
+.inv-clue p {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.inv-deduction-area {
+  margin-top: 28px;
+  padding: 22px;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  background: #17263b;
+}
+
+.inv-deduction-area h3 {
+  margin-top: 0;
+}
+
+.inv-deduction-area p {
+  margin: 12px 0;
+  line-height: 1.7;
+}
+
+.inv-choice-list {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.inv-choice {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #566681;
+  border-radius: 8px;
+  background: #22354e;
+  color: var(--white);
+  text-align: left;
+  line-height: 1.5;
+}
+
+.inv-choice:hover {
+  border-color: var(--gold);
+}
+
+.inv-feedback {
+  padding: 14px;
+  border-radius: 8px;
+  background: #273b54;
+  color: var(--gold-light);
+  line-height: 1.7;
+}
+
+.inv-success {
+  border: 1px solid #80bca0;
+  background: #183b36;
+  color: #dcf8e7;
+}
+
+.inv-save-notice {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.inv-modal {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: rgba(2, 7, 15, 0.9);
+}
+
+.inv-modal-content {
+  width: 100%;
+  max-width: 760px;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  padding: clamp(18px, 4vw, 30px);
+  border: 1px solid var(--gold);
+  border-radius: 14px;
+  background: #101e32;
+}
+
+.inv-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.inv-modal-header h2 {
+  font-size: 22px;
+  color: var(--gold-light);
+}
+
+.inv-paper {
+  padding: clamp(15px, 4vw, 28px);
+  border-radius: 5px;
+  background: #f3efe5;
+  color: #172238;
+}
+
+.inv-paper h3 {
+  margin: 0 0 18px;
+  color: #172238;
+}
+
+.inv-paper p {
+  margin: 12px 0;
+  line-height: 1.6;
+}
+
+.inv-paper table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.inv-paper th,
+.inv-paper td {
+  padding: 12px 8px;
+  border: 1px solid #c8c3b8;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.inv-paper th {
+  background: #e3ded3;
+}
+
+.inv-paper .inv-highlight {
+  background: #fff1c2;
+  font-weight: bold;
+}
+
+.inv-find-btn {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 14px;
+  padding: 12px;
+  border: 2px dashed #9a762d;
+  border-radius: 7px;
+  background: #fff0bd;
+  color: #423113;
+  font-weight: bold;
+  text-align: left;
+}
+
+.inv-find-btn:hover {
+  background: #ffe39a;
+}
+
+.inv-find-btn:disabled {
+  border-style: solid;
+  background: #e0eadf;
+  color: #365842;
+  cursor: default;
+}
+
+.inv-entry-button {
+  width: 100%;
+  min-height: 58px;
+  margin: 0 0 22px;
+}
+
+.inv-entry-locked {
+  margin-bottom: 22px;
+  padding: 17px;
+  border: 1px dashed #566681;
+  border-radius: 10px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+  .inv-document-list {
+    grid-template-columns: 1fr;
+  }
+
+  .inv-evidence-board {
+    grid-template-columns: 1fr;
+  }
+
+  .inv-document-card {
+    min-height: 125px;
+  }
+}
+
+@media (max-width: 480px) {
+  .investigation-header {
+    flex-direction: column;
+  }
+
+  #inv-exit-btn {
+    width: 100%;
+  }
+
+  .inv-witness-card {
+    flex-direction: column;
+  }
+
+  .inv-modal-header {
+    flex-direction: column;
+  }
+
+  #inv-document-close {
+    width: 100%;
+  }
+
+  .inv-paper th,
+  .inv-paper td {
+    padding: 8px 5px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,529 @@
+
+/* THE HIDDEN FILES — CASE 09: THE ALTERED STATEMENT */
+
+#case09-screen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9200 !important;
+  display: block !important;
+  overflow-y: auto !important;
+  padding: 20px 12px 55px !important;
+  background: radial-gradient(
+    ellipse at top,
+    #263951,
+    #101c2d 55%,
+    #070d17
+  ) !important;
+  color: #f2e8d7 !important;
+  box-sizing: border-box !important;
+}
+
+#case09-screen.hidden,
+#case09-screen[hidden] {
+  display: none !important;
+}
+
+#case09-screen * {
+  box-sizing: border-box;
+}
+
+.c09-shell {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.c09-top,
+.c09-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.c09-top {
+  margin-bottom: 20px;
+}
+
+.c09-kicker {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #d4ac67;
+  margin: 0 0 6px;
+}
+
+.c09-title {
+  font-size: clamp(23px, 4vw, 36px);
+  color: #f0d398;
+  margin: 0;
+}
+
+.c09-panel {
+  background: rgba(13, 26, 44, .96);
+  border: 1px solid #77603b;
+  border-radius: 15px;
+  padding: 22px;
+  margin: 0 0 16px;
+  box-shadow: 0 10px 30px #0004;
+}
+
+.c09-panel h2,
+.c09-panel h3 {
+  color: #edca87;
+  margin: 0 0 13px;
+}
+
+.c09-panel p,
+.c09-panel li {
+  line-height: 1.75;
+}
+
+.c09-note {
+  color: #b9c7d7;
+  font-size: 14px;
+}
+
+.c09-btn {
+  font: inherit;
+  font-weight: 700;
+  background: #a77a38;
+  border: 1px solid #d9b36d;
+  border-radius: 9px;
+  padding: 11px 16px;
+  min-height: 44px;
+  color: #fff8e9;
+  cursor: pointer;
+}
+
+.c09-btn.secondary {
+  background: #1a3049;
+  color: #f1d39b;
+}
+
+.c09-btn.ghost {
+  background: transparent;
+  color: #f1d39b;
+}
+
+.c09-btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.c09-btn:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.c09-chip {
+  border: 1px solid #a07b43;
+  border-radius: 30px;
+  padding: 6px 12px;
+  color: #f2d18e;
+  font-size: 13px;
+}
+
+.c09-bar {
+  height: 11px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #081421;
+  border: 1px solid #4c5f74;
+  margin: 12px 0;
+}
+
+.c09-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    #a67b38,
+    #f1c979
+  );
+}
+
+/* ==========================================
+   FINANCIAL STATEMENT COMPARISON
+========================================== */
+
+.c09-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.c09-sheet {
+  border: 1px solid #526c85;
+  border-radius: 11px;
+  overflow: hidden;
+  background: #14273c;
+  min-width: 0;
+}
+
+.c09-sheet h3 {
+  background: #233a52;
+  margin: 0;
+  padding: 14px;
+  color: #f0d297;
+  font-size: 16px;
+}
+
+.c09-sheet p {
+  margin: 0;
+  padding: 10px 14px;
+  color: #c1cedc;
+  font-size: 12px;
+}
+
+.c09-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+}
+
+.c09-table th,
+.c09-table td {
+  padding: 12px 9px;
+  border-top: 1px solid #42536a;
+  text-align: left;
+}
+
+.c09-table td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.c09-table th {
+  background: #1b324b;
+  color: #eacb92;
+}
+
+/* ==========================================
+   NUMBER SELECTION BOX
+========================================== */
+
+/* Default — Gold Border Box */
+
+.c09-figure {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  min-width: 125px;
+  min-height: 44px;
+
+  padding: 10px 14px;
+
+  font: inherit;
+  font-weight: 700;
+  font-size: 14px;
+
+  color: #f5dca9;
+  background: #172b43;
+
+  border: 2px solid #b99150;
+  border-radius: 10px;
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+/* Hover — Brighter Gold */
+
+.c09-figure:hover {
+  background: #514024;
+  border-color: #f0c777;
+  color: #ffffff;
+
+  box-shadow: 0 0 12px rgba(212, 170, 98, .35);
+
+  transform: translateY(-1px);
+}
+
+/* Selected — Orange/Gold */
+
+.c09-figure.selected {
+  background: #80551e;
+  border-color: #ffd17a;
+  color: #ffffff;
+
+  box-shadow: 0 0 14px rgba(212, 170, 98, .45);
+}
+
+/* Selected Hover */
+
+.c09-figure.selected:hover {
+  background: #976622;
+  border-color: #ffe0a0;
+}
+
+/* Correct — Green */
+
+.c09-figure.correct {
+  background: #1c4b3c;
+  border-color: #51c799;
+  color: #d4f8e9;
+
+  box-shadow: 0 0 12px rgba(81, 199, 153, .25);
+}
+
+/* Keyboard Accessibility */
+
+.c09-figure:focus-visible {
+  outline: 3px solid #ffe0a0;
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   EVIDENCE VIEWER
+========================================== */
+
+.c09-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.c09-doc {
+  font: inherit;
+  text-align: left;
+
+  background: #192f48;
+  border: 1px solid #58718a;
+  border-radius: 10px;
+
+  padding: 16px;
+
+  color: #f2e6d2;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.c09-doc:hover {
+  background: #263e59;
+  border-color: #d4aa62;
+}
+
+.c09-doc strong {
+  display: block;
+  color: #e9c789;
+  margin-bottom: 6px;
+}
+
+/* ==========================================
+   INPUT & SELECT
+========================================== */
+
+.c09-select,
+.c09-input {
+  width: 100%;
+  padding: 12px;
+
+  border: 1px solid #8294a8;
+  border-radius: 8px;
+
+  background: #0b1a2b;
+  color: #fff4de;
+
+  font: inherit;
+  min-height: 44px;
+}
+
+.c09-select:focus,
+.c09-input:focus {
+  outline: 2px solid #d4aa62;
+  outline-offset: 2px;
+}
+
+.c09-field {
+  display: block;
+  padding: 13px;
+
+  background: #1b3048;
+  border: 1px solid #516780;
+  border-radius: 10px;
+
+  margin: 10px 0;
+}
+
+.c09-field span {
+  display: block;
+  margin-bottom: 8px;
+
+  color: #efd094;
+  font-weight: 700;
+}
+
+.c09-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* ==========================================
+   FEEDBACK
+========================================== */
+
+.c09-feedback {
+  padding: 13px;
+  border-radius: 9px;
+  margin-top: 14px;
+
+  white-space: pre-line;
+  line-height: 1.7;
+}
+
+.c09-feedback.good {
+  border: 1px solid #4fc596;
+  background: #153e34;
+  color: #d4f8e9;
+}
+
+.c09-feedback.bad {
+  border: 1px solid #d3976b;
+  background: #493024;
+  color: #ffe0c7;
+}
+
+/* ==========================================
+   MODAL
+========================================== */
+
+.c09-modal-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+
+  background: #000d;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 15px;
+}
+
+.c09-modal {
+  background: #102138;
+  border: 1px solid #d5ad6c;
+  border-radius: 15px;
+
+  padding: 23px;
+
+  width: 100%;
+  max-width: 620px;
+  max-height: 85dvh;
+
+  overflow-y: auto;
+  color: #f3e8d6;
+}
+
+.c09-modal h3 {
+  color: #f1d090;
+  margin: 0 0 12px;
+}
+
+.c09-paper {
+  background: #e8e0cf;
+  color: #222;
+
+  padding: 20px;
+  border-radius: 7px;
+
+  font-family: Georgia, serif;
+  white-space: pre-line;
+  line-height: 1.8;
+
+  margin: 12px 0;
+}
+
+/* ==========================================
+   HINT SYSTEM
+========================================== */
+
+.c09-hint {
+  background: #1d344d;
+  border-left: 4px solid #d4aa62;
+  border-radius: 9px;
+
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.c09-hint strong {
+  color: #f1d090;
+}
+
+.c09-hint.locked {
+  opacity: .6;
+}
+
+/* ==========================================
+   FINAL CASE REPORT
+========================================== */
+
+.c09-report-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+
+.c09-report-table th,
+.c09-report-table td {
+  border: 1px solid #4b6177;
+  padding: 11px;
+  text-align: left;
+}
+
+.c09-report-table th {
+  color: #f1d190;
+  background: #233951;
+}
+
+/* ==========================================
+   RESPONSIVE — MOBILE & TABLET
+========================================== */
+
+@media (max-width: 700px) {
+
+  #case09-screen {
+    padding: 14px 9px 45px !important;
+  }
+
+  .c09-panel,
+  .c09-modal {
+    padding: 15px;
+  }
+
+  .c09-comparison,
+  .c09-evidence-grid,
+  .c09-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .c09-row .c09-btn {
+    flex: 1;
+  }
+
+  .c09-table {
+    font-size: 13px;
+  }
+
+  .c09-figure {
+    min-width: 110px;
+    min-height: 44px;
+    padding: 9px 10px;
+    font-size: 13px;
+  }
+
+  .c09-sheet h3 {
+    font-size: 15px;
+  }
+}

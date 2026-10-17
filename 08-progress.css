@@ -1,0 +1,98 @@
+
+/* THE HIDDEN FILES — STEP 08 */
+
+.thf-score-panel {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.thf-score-item {
+  padding: 16px 10px;
+  border: 1px solid #52617a;
+  border-radius: 10px;
+  background: #1b2b43;
+  text-align: center;
+}
+
+.thf-score-item strong {
+  display: block;
+  color: #f2d69b;
+  font-size: clamp(17px, 3vw, 24px);
+}
+
+.thf-score-item span {
+  display: block;
+  margin-top: 7px;
+  color: #a9b5c8;
+  font-size: 11px;
+}
+
+.thf-progress-track {
+  height: 10px;
+  margin: 14px 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #35445b;
+}
+
+.thf-progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: #d9b66f;
+  transition: width .25s ease;
+}
+
+.thf-progress-caption {
+  margin: 12px 0;
+  color: #a9b5c8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.thf-case-badge {
+  display: inline-block;
+  margin-top: 7px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  background: #26463c;
+  color: #c3f3d9;
+  font-size: 11px;
+}
+
+.thf-scoring-notice {
+  margin: 16px 0;
+  padding: 15px;
+  border-left: 3px solid #d9b66f;
+  border-radius: 6px;
+  background: #23354e;
+  color: #f2d69b;
+  line-height: 1.6;
+}
+
+.thf-score-result {
+  margin: 18px 0;
+  padding: 20px;
+  border: 1px solid #d9b66f;
+  border-radius: 10px;
+  background: #22354e;
+  text-align: center;
+}
+
+.thf-score-result strong {
+  display: block;
+  margin: 10px 0;
+  color: #f2d69b;
+  font-size: 32px;
+}
+
+@media (max-width: 480px) {
+  .thf-score-panel {
+    gap: 6px;
+  }
+
+  .thf-score-item {
+    padding: 12px 5px;
+  }
+}

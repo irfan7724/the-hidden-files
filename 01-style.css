@@ -1,0 +1,1017 @@
+
+/* ========================================
+   THE HIDDEN FILES
+   01 - MAIN STYLESHEET
+   STEP 4 COMPLETE VERSION
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-dark: #0b1424;
+  --bg-panel: #17243a;
+  --gold: #d9b66f;
+  --gold-light: #f2d69b;
+  --white: #f7f8fc;
+  --muted: #a9b5c8;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-dark);
+  color: var(--white);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+#app,
+.screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.screen {
+  position: relative;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ========================================
+   WELCOME SCREEN
+======================================== */
+
+#welcome-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+
+  background-color: var(--bg-dark);
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(5, 11, 22, 0.22),
+      rgba(5, 11, 22, 0.06)
+    ),
+    url("bg-detective.png");
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.background-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(4, 9, 19, 0.03),
+    rgba(4, 9, 19, 0.05) 65%,
+    rgba(4, 9, 19, 0.28)
+  );
+  pointer-events: none;
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 760px;
+  text-align: center;
+}
+
+.game-label {
+  margin-bottom: 30px;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 4px;
+}
+
+.game-symbol {
+  margin-bottom: 20px;
+  color: var(--gold);
+  font-size: 40px;
+}
+
+.game-title {
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: 4px;
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.65);
+}
+
+.game-title span {
+  color: var(--gold);
+}
+
+.game-tagline {
+  margin-top: 20px;
+  color: var(--gold-light);
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.gold-line {
+  width: 90px;
+  height: 2px;
+  margin: 30px auto;
+  background: var(--gold);
+}
+
+.game-description {
+  max-width: 500px;
+  margin: auto;
+  color: #e0e5ef;
+  font-size: 16px;
+  line-height: 1.8;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
+}
+
+.welcome-actions {
+  margin-top: 40px;
+}
+
+.season-label {
+  margin-top: 32px;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.welcome-footer {
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+
+  color: #e0e5ef;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.primary-btn {
+  min-height: 52px;
+  padding: 16px 32px;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+
+  background: var(--gold);
+  color: #111827;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.primary-btn:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 1px solid var(--gold);
+  border-radius: 7px;
+
+  background: transparent;
+  color: var(--gold-light);
+  font-weight: bold;
+}
+
+.secondary-btn:hover {
+  background: rgba(217, 182, 111, 0.1);
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* ========================================
+   GENERAL PAGE
+======================================== */
+
+.app-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 16px;
+
+  background: radial-gradient(
+    circle at top,
+    #223652 0%,
+    #101c30 45%,
+    #080f1d 100%
+  );
+}
+
+.page-panel {
+  width: 100%;
+  max-width: 540px;
+  padding: clamp(24px, 5vw, 42px);
+
+  border: 1px solid rgba(217, 182, 111, 0.3);
+  border-radius: 16px;
+  background: rgba(13, 23, 40, 0.95);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.wide-panel {
+  max-width: 980px;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.page-panel h2 {
+  margin-top: 12px;
+  font-size: clamp(25px, 5vw, 36px);
+  line-height: 1.2;
+}
+
+.page-panel h3 {
+  margin-bottom: 14px;
+  color: var(--gold-light);
+}
+
+.page-description {
+  margin: 16px 0 26px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.panel-divider {
+  height: 1px;
+  margin: 28px 0;
+  background: #34445d;
+}
+
+.center-panel {
+  text-align: center;
+}
+
+.large-symbol {
+  margin-bottom: 16px;
+  color: var(--gold);
+  font-size: 60px;
+}
+
+/* ========================================
+   PROFILE SELECTION
+======================================== */
+
+.profile-list {
+  display: grid;
+  gap: 12px;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  width: 100%;
+  padding: 16px;
+  border: 1px solid #41506a;
+  border-radius: 10px;
+
+  background: #1b2b43;
+  color: var(--white);
+  text-align: left;
+}
+
+.profile-card:hover {
+  border-color: var(--gold);
+  background: #263b56;
+}
+
+.profile-avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  background: #34445d;
+  font-size: 24px;
+}
+
+.profile-card-name {
+  font-size: 16px;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.profile-card-hint {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.empty-profiles {
+  padding: 20px;
+  border: 1px dashed #41506a;
+  border-radius: 10px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.profile-form {
+  display: grid;
+  gap: 14px;
+}
+
+.profile-form label {
+  color: var(--gold-light);
+  font-size: 14px;
+}
+
+.profile-form input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+
+  border: 1px solid #51617a;
+  border-radius: 8px;
+  background: #0c1728;
+  color: var(--white);
+}
+
+.profile-form input:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.form-error {
+  color: #ff9ba5;
+  font-size: 13px;
+}
+
+#profile-back-btn {
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* ========================================
+   DETECTIVE HQ
+======================================== */
+
+.hq-avatar {
+  display: grid;
+  place-items: center;
+
+  width: 76px;
+  height: 76px;
+  margin-top: 20px;
+  margin-bottom: 14px;
+
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  background: #283b57;
+  font-size: 42px;
+}
+
+.hq-season-card {
+  padding: 24px;
+  border: 1px solid #455470;
+  border-radius: 12px;
+  background: #1a2b43;
+}
+
+.hq-season-card h3 {
+  margin: 12px 0;
+}
+
+.hq-season-card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.coming-label {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: #34445d;
+  color: var(--gold-light);
+  font-size: 12px;
+}
+
+.hq-actions {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* ========================================
+   PROFILE SETTINGS
+======================================== */
+
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.avatar-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 95px;
+  padding: 12px 8px;
+
+  border: 2px solid #455470;
+  border-radius: 12px;
+  background: #192b44;
+  color: var(--white);
+  font-size: 12px;
+}
+
+.avatar-option .avatar-icon {
+  font-size: 32px;
+}
+
+.avatar-option.selected {
+  border-color: var(--gold);
+  background: #33415a;
+  box-shadow: 0 0 0 2px rgba(217, 182, 111, 0.2);
+}
+
+.settings-select {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px;
+
+  border: 1px solid #51617a;
+  border-radius: 8px;
+  background: #0c1728;
+  color: var(--white);
+}
+
+.setting-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 16px;
+  border: 1px solid #34445d;
+  border-radius: 9px;
+
+  background: #182940;
+  color: var(--white);
+}
+
+.setting-toggle input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--gold);
+}
+
+.settings-back-btn {
+  width: 100%;
+  margin-top: 16px;
+}
+
+#edit-profile-form h3 {
+  margin-top: 12px;
+  margin-bottom: 0;
+}
+
+/* ========================================
+   SEASON SELECTION
+======================================== */
+
+.season-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 30px 0;
+}
+
+.season-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+
+  min-width: 0;
+  min-height: 310px;
+  padding: 24px;
+
+  border: 1px solid #42516c;
+  border-radius: 14px;
+  background: linear-gradient(
+    145deg,
+    #223650,
+    #101b2d
+  );
+
+  color: var(--white);
+  text-align: left;
+}
+
+.season-card.available {
+  border-color: var(--gold);
+  cursor: pointer;
+}
+
+.season-card.available:hover {
+  background: linear-gradient(
+    145deg,
+    #344763,
+    #17263b
+  );
+  transform: translateY(-3px);
+}
+
+.season-card.locked {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.season-number {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.season-card-title {
+  font-size: 21px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.season-card-subtitle {
+  color: var(--gold-light);
+  font-size: 14px;
+}
+
+.season-card-description {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.season-status {
+  margin-top: auto;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.season-status.ready {
+  color: var(--gold-light);
+}
+
+/* ========================================
+   SEASON OVERVIEW
+======================================== */
+
+.season-subheading {
+  margin-top: 10px;
+  color: var(--gold-light);
+  font-size: 18px;
+}
+
+.season-progress-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  padding: 18px 22px;
+  margin-bottom: 24px;
+
+  border: 1px solid #455470;
+  border-radius: 10px;
+  background: #1b2b43;
+  color: var(--gold-light);
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.season-progress-panel strong {
+  font-size: 28px;
+}
+
+.case-preview-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.case-preview {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  min-width: 0;
+  padding: 16px;
+
+  border: 1px solid #34445d;
+  border-radius: 10px;
+  background: #14243a;
+}
+
+.case-preview-number {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  width: 42px;
+  height: 42px;
+  border: 1px solid #576780;
+  border-radius: 8px;
+
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.case-preview-info {
+  min-width: 0;
+}
+
+.case-preview-title {
+  color: var(--white);
+  font-size: 14px;
+  font-weight: bold;
+  overflow-wrap: anywhere;
+}
+
+.case-preview-status {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.overview-notice {
+  margin: 26px 0;
+  padding: 16px;
+
+  border-left: 3px solid var(--gold);
+  background: rgba(217, 182, 111, 0.08);
+
+  color: var(--gold-light);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .season-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .season-card {
+    min-height: 220px;
+  }
+
+  .case-preview-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  #welcome-screen {
+    padding: 75px 18px;
+    background-position: 65% center;
+  }
+
+  .game-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .game-title {
+    font-size: clamp(38px, 11vw, 60px);
+    letter-spacing: 1px;
+  }
+
+  .game-tagline {
+    font-size: 14px;
+  }
+
+  .game-description {
+    font-size: 14px;
+  }
+
+  .welcome-actions .primary-btn {
+    width: 100%;
+    max-width: 340px;
+  }
+
+  .welcome-footer {
+    padding: 0 18px;
+    font-size: 9px;
+  }
+
+  .page-panel {
+    padding: 24px 18px;
+  }
+
+  .profile-form .primary-btn,
+  #enter-hq-btn,
+  .hq-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .avatar-grid {
+    gap: 8px;
+  }
+
+  .avatar-option {
+    min-height: 85px;
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+
+  .avatar-option .avatar-icon {
+    font-size: 27px;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body.reduced-motion *,
+body.reduced-motion *::before,
+body.reduced-motion *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* ========================================
+   DETECTIVE STATISTICS
+======================================== */
+
+#detective-statistics {
+  display: grid;
+  gap: 12px;
+}
+
+.detective-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  padding: 14px 16px;
+
+  border: 1px solid #34445d;
+  border-radius: 9px;
+
+  background: #182940;
+  color: #a9b5c8;
+
+  font-size: 13px;
+}
+
+.detective-stat-row strong {
+  color: #f2d69b;
+  font-size: 17px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+/* ========================================
+   DETECTIVE STATISTICS
+======================================== */
+
+#detective-statistics {
+  display: grid;
+  gap: 12px;
+}
+
+.detective-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+
+  padding: 14px 16px;
+
+  border: 1px solid #34445d;
+  border-radius: 9px;
+
+  background: #182940;
+  color: #a9b5c8;
+
+  font-size: 13px;
+}
+
+.detective-stat-row strong {
+  color: #f2d69b;
+  font-size: 17px;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+#detective-life-recovery {
+  margin-top: 8px;
+  color: #f2d69b;
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .detective-stat-row {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .detective-stat-row strong {
+    font-size: 14px;
+  }
+}
+/* ========================================
+   BACKGROUND MUSIC SETTINGS
+======================================== */
+
+#settings-music-placeholder h3 {
+  color: #f2d69b;
+  margin-bottom: 18px;
+  font-size: 16px;
+}
+
+.music-volume-control {
+  margin-top: 18px;
+}
+
+.music-volume-control label {
+  display: block;
+  color: #e2e8f0;
+  margin-bottom: 12px;
+}
+
+.music-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+#profile-music-volume {
+  flex: 1;
+  min-width: 0;
+  accent-color: #d9b66f;
+  cursor: pointer;
+}
+
+#profile-music-volume:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#profile-music-volume-value {
+  min-width: 45px;
+  text-align: right;
+  color: #f2d69b;
+  font-size: 15px;
+}
+
+/* ========================================
+   THE HIDDEN FILES
+   SHARED DETECTIVE BACKGROUND
+   NON-CASE SCREENS ONLY
+======================================== */
+
+/* Welcome, Profile, HQ, Settings,
+   Season Selection & Season Overview */
+
+#welcome-screen,
+#profile-screen,
+#created-screen,
+#hq-screen,
+#edit-profile-screen,
+#seasons-screen,
+#far-overview-screen,
+#story-complete-screen {
+
+  background-color: #0b1424;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(5, 11, 22, 0.22),
+      rgba(5, 11, 22, 0.06)
+    ),
+    url("bg-detective.png");
+
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+}
+
+/* Make panels slightly transparent
+   so the detective background is visible */
+
+#profile-screen .page-panel,
+#created-screen .page-panel,
+#hq-screen .page-panel,
+#edit-profile-screen .page-panel,
+#seasons-screen .page-panel,
+#far-overview-screen .page-panel,
+#story-complete-screen .page-panel {
+
+  background: rgba(13, 23, 40, 0.82);
+
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  border: 1px solid rgba(217, 182, 111, 0.35);
+
+}
+
+/* Mobile responsiveness */
+
+@media (max-width: 700px) {
+
+  #welcome-screen,
+  #profile-screen,
+  #created-screen,
+  #hq-screen,
+  #edit-profile-screen,
+  #seasons-screen,
+  #far-overview-screen,
+  #story-complete-screen {
+
+    background-position: 65% center;
+    background-attachment: scroll;
+
+  }
+
+}

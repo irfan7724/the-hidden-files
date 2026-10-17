@@ -1,0 +1,252 @@
+
+/* ========================================
+   THE HIDDEN FILES
+   07 - CASE 01 PUZZLE
+======================================== */
+
+.case01-page {
+  align-items: flex-start;
+}
+
+.case01-panel {
+  max-width: 980px;
+}
+
+.case01-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.case01-header h2 {
+  color: var(--gold-light);
+}
+
+.case01-muted {
+  margin: 12px 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.case01-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 26px 0;
+}
+
+.case01-steps span {
+  padding: 10px 12px;
+  border: 1px solid #42516c;
+  border-radius: 7px;
+  background: #182940;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.case01-steps span.active {
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+.case01-box {
+  padding: clamp(16px, 4vw, 28px);
+  border: 1px solid #455470;
+  border-radius: 12px;
+  background: #192b43;
+}
+
+.case01-box h3 {
+  margin: 0 0 16px;
+  color: var(--gold-light);
+}
+
+.case01-box p {
+  margin: 12px 0;
+  line-height: 1.7;
+}
+
+.case01-document {
+  margin: 20px 0;
+  padding: clamp(14px, 3vw, 24px);
+  border-radius: 8px;
+  background: #f3efe5;
+  color: #18243a;
+}
+
+.case01-document h4 {
+  margin-bottom: 14px;
+  color: #18243a;
+}
+
+.case01-document p {
+  color: #18243a;
+}
+
+.case01-row {
+  display: grid;
+  grid-template-columns: 1fr 110px 110px;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  min-height: 58px;
+  padding: 12px;
+  border: 2px solid #c8c3b8;
+  border-radius: 6px;
+  margin: 8px 0;
+  background: #ffffff;
+  color: #18243a;
+  text-align: left;
+  font-weight: bold;
+}
+
+.case01-row:hover {
+  border-color: #a17b35;
+  background: #fff2cb;
+}
+
+.case01-row.selected {
+  border-color: #b1842e;
+  background: #ffe4a3;
+}
+
+.case01-row:disabled {
+  cursor: default;
+}
+
+.case01-row span:not(:first-child) {
+  text-align: right;
+}
+
+.case01-choices {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.case01-choice {
+  width: 100%;
+  min-height: 54px;
+  padding: 14px 16px;
+  border: 1px solid #596a84;
+  border-radius: 9px;
+  background: #253b55;
+  color: var(--white);
+  text-align: left;
+  line-height: 1.6;
+}
+
+.case01-choice:hover {
+  border-color: var(--gold);
+}
+
+.case01-choice.selected {
+  border: 2px solid var(--gold);
+  background: #384c63;
+}
+
+.case01-feedback {
+  padding: 15px;
+  margin: 18px 0;
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  background: #283c55;
+  color: var(--gold-light);
+  line-height: 1.7;
+}
+
+.case01-feedback.success {
+  border-left-color: #83c5a3;
+  background: #173c35;
+  color: #e2ffef;
+}
+
+.case01-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.case01-actions button {
+  flex: 1;
+  min-width: 180px;
+}
+
+.case01-report {
+  padding: 22px;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  background: #182940;
+}
+
+.case01-report h3 {
+  color: var(--gold-light);
+}
+
+.case01-report-grid {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.case01-report-item {
+  padding: 14px;
+  border: 1px solid #40516b;
+  border-radius: 8px;
+}
+
+.case01-report-item strong {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--gold-light);
+}
+
+.case01-report-item p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.case01-stamp {
+  display: inline-block;
+  padding: 10px 15px;
+  border: 2px solid #83c5a3;
+  border-radius: 7px;
+  color: #b9f2d1;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.case01-hint {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .case01-header {
+    flex-direction: column;
+  }
+
+  #case01-exit-btn {
+    width: 100%;
+  }
+
+  .case01-row {
+    grid-template-columns: 1fr 75px 75px;
+    gap: 5px;
+    padding: 10px 7px;
+    font-size: 12px;
+  }
+
+  .case01-actions {
+    flex-direction: column;
+  }
+
+  .case01-actions button {
+    width: 100%;
+    min-width: 0;
+  }
+}
