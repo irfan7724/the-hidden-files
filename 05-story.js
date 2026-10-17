@@ -98,22 +98,20 @@ const STORY_UI = {
     exit: "EXIT",
     back: "BACK",
     history: "HISTORY",
-    skip: "SKIP",
     next: "NEXT →",
     finish: "FINISH BRIEFING →",
     close: "CLOSE",
     historyTitle: "Dialogue History",
     completeTitle: "The Investigation Begins",
     completeDescription:
-      "The briefing is complete. Case 01 — The Invoice Trap will become playable when the Investigation Desk is added.",
+      "The briefing is complete. Case 01 — The Invoice Trap is now unlocked. Return to Season Overview and open Case Files to begin your investigation.",
     returnButton: "RETURN TO SEASON OVERVIEW",
     exitConfirm:
       "Leave Story Mode? Your current position will be saved.",
-    skipConfirm:
-      "Skip the remaining dialogue? You can replay the prologue later.",
     saveWarning:
       "Your browser could not save Story Mode progress. You can continue, but your position may be lost after refresh."
   },
+
   ms: {
     chapter: "PROLOG — MAKLUMAT TANPA NAMA",
     start: "MULAKAN MOD CERITA",
@@ -122,19 +120,16 @@ const STORY_UI = {
     exit: "KELUAR",
     back: "KEMBALI",
     history: "SEJARAH",
-    skip: "LANGKAU",
     next: "SETERUSNYA →",
     finish: "TAMATKAN TAKLIMAT →",
     close: "TUTUP",
     historyTitle: "Sejarah Dialog",
     completeTitle: "Penyiasatan Bermula",
     completeDescription:
-      "Taklimat telah selesai. Case 01 — The Invoice Trap akan boleh dimainkan selepas Investigation Desk dibina.",
+      "Taklimat telah selesai. Case 01 — The Invoice Trap kini dibuka. Kembali ke Season Overview dan buka Fail Kes untuk memulakan penyiasatan.",
     returnButton: "KEMBALI KE PILIHAN KES",
     exitConfirm:
       "Keluar daripada Mod Cerita? Kedudukan semasa akan disimpan.",
-    skipConfirm:
-      "Langkau dialog yang tinggal? Awak boleh mengulang prolog kemudian.",
     saveWarning:
       "Browser tidak dapat menyimpan kemajuan cerita. Awak masih boleh meneruskan, tetapi kedudukan mungkin hilang selepas refresh."
   }
@@ -158,14 +153,20 @@ function storyProfile() {
 function storyLanguage() {
   const profile = storyProfile();
 
-  return profile &&
+  const language =
+    profile &&
     typeof getProfileLanguage === "function"
-    ? getProfileLanguage(profile)
-    : "en";
+      ? getProfileLanguage(profile)
+      : "en";
+
+  return ["ms", "bm", "malay"].includes(
+    String(language).toLowerCase()
+  ) ? "ms" : "en";
 }
 
 function storySaveId() {
   const profile = storyProfile();
+
   return profile
     ? STORY_SAVE_KEY + "_" + profile.id
     : null;
@@ -205,14 +206,17 @@ function readStorySave() {
       position,
       completed: saved.completed === true
     };
+
   } catch (error) {
     console.warn("Story save could not be read:", error);
+
     return { position: 0, completed: false };
   }
 }
 
 function saveStory() {
   const key = storySaveId();
+
   if (!key) return false;
 
   try {
@@ -223,7 +227,9 @@ function saveStory() {
         completed: storyCompleted
       })
     );
+
     return true;
+
   } catch (error) {
     console.error("Story save failed:", error);
     return false;
@@ -236,7 +242,10 @@ function saveStory() {
 
 function storySetText(id, text) {
   const element = document.getElementById(id);
-  if (element) element.textContent = text;
+
+  if (element) {
+    element.textContent = text;
+  }
 }
 
 function renderStory() {
@@ -260,7 +269,6 @@ function renderStory() {
   storySetText("story-exit-btn", t.exit);
   storySetText("story-back-btn", t.back);
   storySetText("story-history-btn", t.history);
-  storySetText("story-skip-btn", t.skip);
 
   storySetText(
     "story-next-btn",
@@ -272,19 +280,34 @@ function renderStory() {
   storySetText("history-title", t.historyTitle);
   storySetText("story-close-history-btn", t.close);
 
-  document.getElementById(
+  const backButton = document.getElementById(
     "story-back-btn"
-  ).disabled = storyPosition === 0;
+  );
+
+  if (backButton) {
+    backButton.disabled = storyPosition === 0;
+  }
+
+  // Remove SKIP button completely.
+  const skipButton = document.getElementById(
+    "story-skip-btn"
+  );
+
+  if (skipButton) {
+    skipButton.remove();
+  }
 
   const character = document.getElementById(
     "story-character-image"
   );
 
-  if (dialogue.character) {
-    character.style.display = "";
-    character.src = "char-alya.png";
-  } else {
-    character.style.display = "none";
+  if (character) {
+    if (dialogue.character) {
+      character.style.display = "";
+      character.src = "char-alya.png";
+    } else {
+      character.style.display = "none";
+    }
   }
 }
 
@@ -303,14 +326,14 @@ function openStory() {
   storyPosition = saved.position;
   storyCompleted = saved.completed;
 
-  // Completed prologues can be replayed
-  // without deleting their completion status.
+  // Replay without deleting completion status.
   if (storyCompleted) {
     storyPosition = 0;
   }
 
   closeStoryHistory();
   renderStory();
+
   showScreen("story-screen");
 }
 
@@ -327,6 +350,7 @@ function renderStoryEntry() {
   const saved = readStorySave();
 
   const button = document.createElement("button");
+
   button.type = "button";
   button.className = "primary-btn story-entry-btn";
 
@@ -337,6 +361,7 @@ function renderStoryEntry() {
       : t.start;
 
   button.addEventListener("click", openStory);
+
   area.appendChild(button);
 }
 
@@ -347,6 +372,7 @@ function renderStoryEntry() {
 function nextStory() {
   if (storyPosition < STORY_DIALOGUES.length - 1) {
     storyPosition++;
+
     saveStory();
     renderStory();
     return;
@@ -359,6 +385,7 @@ function previousStory() {
   if (storyPosition <= 0) return;
 
   storyPosition--;
+
   saveStory();
   renderStory();
 }
@@ -366,20 +393,15 @@ function previousStory() {
 function exitStory() {
   const t = STORY_UI[storyLanguage()];
 
-  if (!window.confirm(t.exitConfirm)) return;
+  if (!window.confirm(t.exitConfirm)) {
+    return;
+  }
 
   saveStory();
   closeStoryHistory();
   renderStoryEntry();
+
   showScreen("far-overview-screen");
-}
-
-function skipStory() {
-  const t = STORY_UI[storyLanguage()];
-
-  if (!window.confirm(t.skipConfirm)) return;
-
-  completeStory();
 }
 
 function completeStory() {
@@ -408,6 +430,7 @@ function completeStory() {
   );
 
   closeStoryHistory();
+
   showScreen("story-complete-screen");
 }
 
@@ -420,6 +443,8 @@ function openStoryHistory() {
     "story-history-list"
   );
 
+  if (!list) return;
+
   list.replaceChildren();
 
   const lang = storyLanguage();
@@ -427,6 +452,7 @@ function openStoryHistory() {
   STORY_DIALOGUES
     .slice(0, storyPosition + 1)
     .forEach(dialogue => {
+
       const item = document.createElement("div");
       item.className = "story-history-item";
 
@@ -443,21 +469,37 @@ function openStoryHistory() {
   storyHistoryReturnFocus = document.activeElement;
   storyHistoryOpen = true;
 
-  document.getElementById(
+  const panel = document.getElementById(
     "story-history-panel"
-  ).classList.remove("hidden");
+  );
 
-  document.getElementById(
+  if (panel) {
+    panel.classList.remove("hidden");
+  }
+
+  const closeButton = document.getElementById(
     "story-close-history-btn"
-  ).focus();
+  );
+
+  if (closeButton) {
+    closeButton.focus();
+  }
 }
 
 function closeStoryHistory() {
-  document.getElementById(
+  const panel = document.getElementById(
     "story-history-panel"
-  ).classList.add("hidden");
+  );
 
-  if (storyHistoryOpen && storyHistoryReturnFocus) {
+  if (panel) {
+    panel.classList.add("hidden");
+  }
+
+  if (
+    storyHistoryOpen &&
+    storyHistoryReturnFocus &&
+    typeof storyHistoryReturnFocus.focus === "function"
+  ) {
     storyHistoryReturnFocus.focus();
   }
 
@@ -470,6 +512,16 @@ function closeStoryHistory() {
 // ========================================
 
 function initialiseStory() {
+
+  // Remove SKIP button permanently.
+  const skipButton = document.getElementById(
+    "story-skip-btn"
+  );
+
+  if (skipButton) {
+    skipButton.remove();
+  }
+
   document.getElementById(
     "story-next-btn"
   ).addEventListener("click", nextStory);
@@ -483,10 +535,6 @@ function initialiseStory() {
   ).addEventListener("click", exitStory);
 
   document.getElementById(
-    "story-skip-btn"
-  ).addEventListener("click", skipStory);
-
-  document.getElementById(
     "story-history-btn"
   ).addEventListener("click", openStoryHistory);
 
@@ -497,8 +545,15 @@ function initialiseStory() {
   document.getElementById(
     "story-complete-back-btn"
   ).addEventListener("click", () => {
+
     renderStoryEntry();
+
     showScreen("far-overview-screen");
+
+    // Refresh navigation after completing Story Mode.
+    if (typeof thfRefreshNavigation === "function") {
+      thfRefreshNavigation();
+    }
   });
 
   document.getElementById(
@@ -508,14 +563,12 @@ function initialiseStory() {
   document.getElementById(
     "profile-language"
   ).addEventListener("change", () => {
-    // The language choice is only permanent
-    // after the existing SAVE CHANGES action.
+    // Language is saved through SAVE CHANGES.
   });
 
   document.getElementById(
     "save-profile-btn"
   ).addEventListener("click", () => {
-    // Run after the existing profile form handler.
     queueMicrotask(renderStoryEntry);
   });
 
@@ -526,12 +579,16 @@ function initialiseStory() {
       closeStoryHistory();
     }
 
-    // Keep keyboard focus inside the dialog.
     if (event.key === "Tab") {
       event.preventDefault();
-      document.getElementById(
+
+      const closeButton = document.getElementById(
         "story-close-history-btn"
-      ).focus();
+      );
+
+      if (closeButton) {
+        closeButton.focus();
+      }
     }
   });
 
