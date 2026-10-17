@@ -13,6 +13,152 @@ let profiles = [];
 let activeProfileId = null;
 
 // ----------------------------------------
+// CUSTOM POPUP
+// ----------------------------------------
+
+function showDetectivePopup(options = {}) {
+
+  const existing = document.getElementById(
+    "thf-profile-popup"
+  );
+
+  if (existing) {
+    existing.remove();
+  }
+
+  const overlay = document.createElement("div");
+  overlay.id = "thf-profile-popup";
+
+  overlay.style.cssText = `
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.8);
+  `;
+
+  const modal = document.createElement("div");
+
+  modal.style.cssText = `
+    width: 100%;
+    max-width: 430px;
+    padding: 30px 25px;
+    box-sizing: border-box;
+    text-align: center;
+    background: linear-gradient(
+      145deg,
+      #15263d,
+      #0b1525
+    );
+    border: 1px solid #d9b66f;
+    border-radius: 18px;
+    color: #f3e7d0;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  `;
+
+  const icon = document.createElement("div");
+  icon.textContent = options.icon || "⚠️";
+  icon.style.fontSize = "42px";
+  icon.style.marginBottom = "12px";
+
+  const title = document.createElement("h2");
+  title.textContent = options.title || "CONFIRM ACTION";
+
+  title.style.cssText = `
+    color: #e3be75;
+    font-size: 22px;
+    margin: 0 0 16px;
+    letter-spacing: 1px;
+  `;
+
+  const message = document.createElement("p");
+  message.textContent = options.message || "";
+
+  message.style.cssText = `
+    white-space: pre-line;
+    line-height: 1.7;
+    font-size: 14px;
+    margin: 0 0 25px;
+    color: #e6e0d5;
+  `;
+
+  const actions = document.createElement("div");
+
+  actions.style.cssText = `
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  `;
+
+  function makeButton(label, background) {
+
+    const button = document.createElement("button");
+
+    button.type = "button";
+    button.textContent = label;
+
+    button.style.cssText = `
+      min-width: 120px;
+      padding: 12px 20px;
+      border: 1px solid #d9b66f;
+      border-radius: 9px;
+      background: ${background};
+      color: #ffffff;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    `;
+
+    return button;
+  }
+
+  const cancelButton = makeButton(
+    options.cancelText || "CANCEL",
+    "#29364a"
+  );
+
+  const confirmButton = makeButton(
+    options.confirmText || "DELETE",
+    "#973d3d"
+  );
+
+  function closePopup() {
+    overlay.remove();
+  }
+
+  cancelButton.addEventListener("click", closePopup);
+
+  confirmButton.addEventListener("click", function () {
+
+    closePopup();
+
+    if (typeof options.onConfirm === "function") {
+      options.onConfirm();
+    }
+
+  });
+
+  actions.append(cancelButton, confirmButton);
+
+  modal.append(
+    icon,
+    title,
+    message,
+    actions
+  );
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  cancelButton.focus();
+}
+
+// ----------------------------------------
 // SAFE LOCAL STORAGE
 // ----------------------------------------
 
@@ -31,10 +177,12 @@ function writeStorage(key, value) {
     return true;
   } catch (error) {
     console.error("Could not save data:", error);
+
     alert(
       "Your browser could not save this profile. " +
       "Please enable site storage and try again."
     );
+
     return false;
   }
 }
@@ -77,9 +225,9 @@ const screenIds = [
   "edit-profile-screen"
 ];
 
-
 function showScreen(screenId) {
   screenIds.forEach(id => {
+
     const screen = document.getElementById(id);
 
     if (screen) {
@@ -88,6 +236,7 @@ function showScreen(screenId) {
         id !== screenId
       );
     }
+
   });
 
   window.scrollTo(0, 0);
@@ -98,6 +247,7 @@ function showScreen(screenId) {
 // ----------------------------------------
 
 function renderProfileList() {
+
   const container = document.getElementById(
     "profile-list"
   );
@@ -105,8 +255,10 @@ function renderProfileList() {
   container.replaceChildren();
 
   if (profiles.length === 0) {
+
     const empty = document.createElement("p");
     empty.className = "empty-profiles";
+
     empty.textContent =
       "No detective profiles yet. Create one below.";
 
@@ -115,16 +267,19 @@ function renderProfileList() {
   }
 
   profiles.forEach(profile => {
+
     const button = document.createElement("button");
+
     button.type = "button";
     button.className = "profile-card";
 
     const avatar = document.createElement("span");
     avatar.className = "profile-avatar";
+
     avatar.textContent =
-  typeof getAvatarIcon === "function"
-    ? getAvatarIcon(profile.avatar)
-    : "🕵️";
+      typeof getAvatarIcon === "function"
+        ? getAvatarIcon(profile.avatar)
+        : "🕵️";
 
     const info = document.createElement("span");
 
@@ -152,6 +307,7 @@ function renderProfileList() {
 // ----------------------------------------
 
 function generateProfileId() {
+
   if (
     window.crypto &&
     typeof window.crypto.randomUUID === "function"
@@ -168,6 +324,7 @@ function generateProfileId() {
 }
 
 function createProfile(event) {
+
   event.preventDefault();
 
   const input = document.getElementById(
@@ -184,8 +341,10 @@ function createProfile(event) {
   errorText.textContent = "";
 
   if (name.length < 2 || name.length > 24) {
+
     errorText.textContent =
       "Please enter a name between 2 and 24 characters.";
+
     errorText.hidden = false;
     return;
   }
@@ -205,8 +364,6 @@ function createProfile(event) {
     return;
   }
 
-  // New profile is saved, but does not
-  // automatically enter HQ.
   activeProfileId = null;
 
   document.getElementById(
@@ -223,6 +380,7 @@ function createProfile(event) {
   };
 
   input.value = "";
+
   showScreen("created-screen");
 }
 
@@ -231,6 +389,7 @@ function createProfile(event) {
 // ----------------------------------------
 
 function loginProfile(profileId) {
+
   const profile = profiles.find(
     item => item.id === profileId
   );
@@ -259,11 +418,17 @@ function loginProfile(profileId) {
 }
 
 function logoutProfile() {
+
   try {
     localStorage.removeItem(ACTIVE_PROFILE_KEY);
   } catch (error) {
+
     console.error("Logout storage error:", error);
-    alert("Unable to log out. Please check browser storage.");
+
+    alert(
+      "Unable to log out. Please check browser storage."
+    );
+
     return;
   }
 
@@ -278,6 +443,7 @@ function logoutProfile() {
 // ----------------------------------------
 
 function initialiseAccounts() {
+
   profiles = loadProfiles();
 
   document.getElementById(
@@ -321,9 +487,9 @@ document.addEventListener(
   initialiseAccounts
 );
 
-/* ========================================
-   DELETE DETECTIVE PROFILE
-======================================== */
+// ----------------------------------------
+// DELETE DETECTIVE PROFILE
+// ----------------------------------------
 
 function deleteDetectiveProfile() {
 
@@ -334,7 +500,13 @@ function deleteDetectiveProfile() {
   if (!profile) return;
 
   const language =
-    profile.settings?.language === "ms"
+    ["ms", "bm", "malay"].includes(
+      String(
+        typeof getProfileLanguage === "function"
+          ? getProfileLanguage(profile)
+          : profile.settings?.language || "en"
+      ).toLowerCase()
+    )
       ? "ms"
       : "en";
 
@@ -350,61 +522,87 @@ function deleteDetectiveProfile() {
       "detective will be permanently deleted.\n\n" +
       "This action cannot be undone.";
 
-  const confirmed = window.confirm(message);
+  showDetectivePopup({
 
-  if (!confirmed) return;
+    icon: "🗑️",
 
-  const profileId = profile.id;
+    title: language === "ms"
+      ? "PADAM PROFIL?"
+      : "DELETE PROFILE?",
 
-  // Keep other detective profiles.
-  const previousProfiles = profiles;
+    message: message,
 
-  profiles = profiles.filter(
-    item => item.id !== profileId
-  );
+    cancelText: language === "ms"
+      ? "BATAL"
+      : "CANCEL",
 
-  // Save the updated profile list.
-  if (!saveProfiles()) {
-    profiles = previousProfiles;
-    return;
-  }
+    confirmText: language === "ms"
+      ? "PADAM"
+      : "DELETE",
 
-  // Remove only progress belonging to this detective.
-  try {
+    onConfirm: function () {
 
-    const progressPrefix =
-      "thf_progress_s1_v1_";
+      const profileId = profile.id;
 
-    localStorage.removeItem(
-      progressPrefix + profileId
-    );
+      const previousProfiles = profiles;
 
-    // Remove active login.
-    localStorage.removeItem(
-      ACTIVE_PROFILE_KEY
-    );
+      // Keep all other detective profiles.
+      profiles = profiles.filter(
+        item => item.id !== profileId
+      );
 
-  } catch (error) {
+      if (!saveProfiles()) {
+        profiles = previousProfiles;
+        return;
+      }
 
-    console.error(
-      "Profile cleanup error:",
-      error
-    );
+      // Delete only this detective's saved data.
+      try {
 
-  }
+        const keysToDelete = [];
 
-  // Stop using the deleted profile.
-  activeProfileId = null;
+        for (let i = 0; i < localStorage.length; i++) {
 
-  // Return to profile selection.
-  renderProfileList();
-  showScreen("profile-screen");
+          const key = localStorage.key(i);
 
+          if (
+            key &&
+            key.startsWith("thf_") &&
+            key.endsWith("_" + profileId)
+          ) {
+            keysToDelete.push(key);
+          }
+        }
+
+        keysToDelete.forEach(key => {
+          localStorage.removeItem(key);
+        });
+
+        localStorage.removeItem(
+          ACTIVE_PROFILE_KEY
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Profile cleanup error:",
+          error
+        );
+
+      }
+
+      activeProfileId = null;
+
+      renderProfileList();
+      showScreen("profile-screen");
+    }
+
+  });
 }
 
-/* ========================================
-   DELETE PROFILE BUTTON
-======================================== */
+// ----------------------------------------
+// DELETE PROFILE BUTTON
+// ----------------------------------------
 
 function initialiseDeleteProfile() {
 
@@ -418,7 +616,6 @@ function initialiseDeleteProfile() {
     "click",
     deleteDetectiveProfile
   );
-
 }
 
 if (document.readyState === "loading") {
