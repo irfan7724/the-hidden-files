@@ -1477,20 +1477,92 @@ function setupProfile() {
      OPEN CASE FILES
   ====================================== */
 
-  function openFiles() {
+function showStoryLockedPopup() {
 
-    if (!profile()) {
-
-      show("profile-screen");
-      return;
-    }
-
-    currentPage = "files";
-
-    renderFiles();
-
-    show("case-files-screen");
+  // Prevent duplicate popups
+  if (document.getElementById("thf-story-lock-popup")) {
+    return;
   }
+
+  const overlay = document.createElement("div");
+  overlay.id = "thf-story-lock-popup";
+
+  overlay.style.cssText = `
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.8);
+  `;
+
+  const popup = document.createElement("div");
+
+  popup.style.cssText = `
+    width: 100%;
+    max-width: 400px;
+    padding: 30px 24px;
+    box-sizing: border-box;
+    text-align: center;
+    background: #101e33;
+    border: 1px solid #d9b66f;
+    border-radius: 18px;
+    color: #f3e7d0;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+  `;
+
+  const icon = document.createElement("div");
+  icon.textContent = "🔒";
+  icon.style.fontSize = "42px";
+
+  const title = document.createElement("h2");
+  title.textContent = t().locked;
+  title.style.color = "#e3be75";
+  title.style.margin = "15px 0";
+
+  const message = document.createElement("p");
+  message.textContent = t().prologue;
+  message.style.margin = "20px 0";
+  message.style.lineHeight = "1.6";
+
+  const close = document.createElement("button");
+  close.type = "button";
+  close.className = "primary-btn";
+  close.textContent = "OK";
+
+  close.addEventListener("click", function () {
+    overlay.remove();
+  });
+
+  popup.append(icon, title, message, close);
+  overlay.appendChild(popup);
+
+  document.body.appendChild(overlay);
+}
+
+
+function openFiles() {
+
+  if (!profile()) {
+    show("profile-screen");
+    return;
+  }
+
+  // Story Mode must be completed first
+  if (!storyDone()) {
+    showStoryLockedPopup();
+    return;
+  }
+
+  currentPage = "files";
+
+  renderFiles();
+
+  show("case-files-screen");
+}
 
   /* ======================================
      STORY MODE
@@ -1640,12 +1712,16 @@ function setupProfile() {
         openStory
       ),
 
-      menuCard(
-        "📁",
-        t().files,
-        t().filesDesc,
-        openFiles
-      ),
+
+menuCard(
+  storyDone() ? "📁" : "🔒",
+  t().files,
+  storyDone()
+    ? t().filesDesc
+    : t().prologue,
+  openFiles
+),
+
 
       menuCard(
         "🗂️",
